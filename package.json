@@ -1,0 +1,22 @@
+{
+  "name": "svetit",
+  "version": "0.0.1",
+  "description": "Framework for work with entity in Svelte",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TitarLab/svetit.git"
+  },
+  "keywords": [
+    "svelte"
+  ],
+  "author": "Volodymyr Tytarenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TitarLab/svetit/issues"
+  },
+  "homepage": "https://github.com/TitarLab/svetit#readme"
+}
