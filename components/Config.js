@@ -19,7 +19,7 @@ const defaultConfigParam = {
     }
 };
 
-export class Config{
+export default class Config{
     constructor(apiResponse = defaultConfigParam) {
         this.setApiResponse(apiResponse);
     }
