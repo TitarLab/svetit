@@ -1,42 +1,56 @@
 import Requester from "../utils/Requester";
 import Config from "./Config";
 
-export class Model{
+export default class Model{
     constructor(url, config = new Config) {
         this.config = config;
         this.entity = {};
-        this.url = "/";
+        this.url = url;
     }
 
-    async getList(url = null){
+    async getList(url = null, query = []){
         url = url !== null ? url : this.url;
-        let response = Requester.get(url);
-        if(this.config.validateApiResponse(response) == true){
-            return response[this.config.data.name];
-        }
+
+        return Requester.get(Requester.getUrl(url, query)).then((response) => {
+            if(this.config.validateApiResponse(response) == true){
+                return response[this.config.getApiResponse().data.name];
+            }else{
+                return false;
+            }
+        });
     }
 
-    async getItem(id, url = null){
+    async getItem(id, url = null, query = []){
         url = url !== null ? url : this.url;
-        let response = Requester.get(url+"/"+id);
-        if(this.config.validateApiResponse(response) == true){
-            return response[this.config.data.name];
-        }
+        return  Requester.get(Requester.getUrl(url+"/"+id, query)).then((response) => {
+            if(this.config.validateApiResponse(response) == true){
+                return response[this.config.getApiResponse().data.name];
+            }else{
+                return false;
+            }
+        });
+
     }
 
-    async update(id, data, url = null){
+    async update(id, data, url = null, query = []){
         url = url !== null ? url : this.url;
-        let response = Requester.post(url+"/"+id,data);
-        if(this.config.validateApiResponse(response) == true){
-            return response[this.config.data.name];
-        }
+        return Requester.post(Requester.getUrl(url+"/"+id, query),data).then((response) => {
+            if(this.config.validateApiResponse(response) == true){
+                return response[this.config.getApiResponse().data.name];
+            }else{
+                return false;
+            }
+        })
     }
 
-    async create(data, url = null){
+    async create(data, url = null, query = []){
         url = url !== null ? url : this.url;
-        let response = Requester.post(url,data);
-        if(this.config.validateApiResponse(response) == true){
-            return response[this.config.data.name];
-        }
+        return Requester.post(Requester.getUrl(url, query),data).then((response) => {
+            if(this.config.validateApiResponse(response) == true){
+                return response[this.config.getApiResponse().data.name];
+            }else{
+                return false;
+            }
+        });
     }
 }
